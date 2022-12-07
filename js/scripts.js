@@ -1,37 +1,41 @@
-/*function newItem() {
+//newitem() to work with the button on click
+function newItem() {
 
-    //javascript
-    //1. Adding a new item to the list of items: 
-    let li = document.createElement("li");
-    let inputValue = document.getElementById("input").value;
+    // 1. Add a new item to the list of items and add (VAL() to attach a vale(number) to the input element):
+    let li = $('<li></li>');
+    let inputValue = $('#input').val();
     let text = document.createTextNode(inputValue);
-    li.appendChild(text);
+    li.append(text);
 
     if (inputValue === '') {
-        alert("You must write something!");
+        alert("You must write something, please!");
     } else {
-        let list = document.querySelector('#list');
-        list.appendChild(li);
+        let list = $('#list');
+        list.append(li);
     }
 
-    //2. Crossing out an item from the list of items:
+
+    // 2. Crossing  item from the list of items:
     function crossOut() {
-        li.classList.toggle("strike");
+        li.toggleClass('strike');
     }
+    // 2.5 double click any li to (strike out) the li
+    li.on('dblclick', crossOut);
 
-    li.addEventListener("dblclick", crossOut);
+    // 3. Adding the delete button {"X"}:
+    let crossOutButton = $("<crossOutButton></crossOutButton>");
+    crossOutButton.append(document.createTextNode("X"));
+    li.append(crossOutButton);
 
-    //3(i). Adding the delete button "X": 
-    let crossOutButton = document.createElement("crossOutButton");
-    crossOutButton.appendChild(document.createTextNode("X"));
-    li.appendChild(crossOutButton);
 
-    crossOutButton.addEventListener("click", deleteListItem);
-    //3(ii). Adding CLASS DELETE (DISPLAY: NONE) from the css:
+    crossOutButton.on('click', deleteListItem);
+
+    // 3. Adding the "class" delete "DISPLAY: NONE" from the file css:
     function deleteListItem() {
-        li.classList.add("delete")
+        li.addClass('delete');
     }
-    // 4. Reordering the items: 
+
+    // 4. Reordering the items on the li list everytime you hit enter to show the different list items:
     $('#list').sortable();
 
 }
